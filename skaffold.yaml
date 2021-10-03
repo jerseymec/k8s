@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta22
+kind: Config
+metadata:
+  name: k-s
+build:
+  artifacts:
+  - image: python-hello-world
+    context: src
+    docker: {}
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes-manifests/hello.deployment.yaml
+    - kubernetes-manifests/hello.service.yaml
+profiles:
+- name: gcb
+  build:
+    googleCloudBuild: {}
